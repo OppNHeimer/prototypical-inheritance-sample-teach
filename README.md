@@ -70,18 +70,23 @@ Constructor functions help us define new objects with less repetition.
 - constructor functions can be called with the 'new' keyword
 
 First we define our constructor function.
->function Bike (brand, type, color) {
->  this.brand = brand
->  this.type = type
->  this.color = color
->  this.wheels = 2
->  this.roll = function () {
->    console.log('they see me rollin')
->  }
->} 
+```javascript
+function Bike (brand, type, color) {
+  this.brand = brand
+  this.type = type
+  this.color = color
+  this.wheels = 2
+  this.roll = function () {
+    console.log('they see me rollin')
+  }
+} 
+```
+
 Then, we call it.
->bike1 = new Bike('Cannondale', 'road', 'red')
->bike2 = new Bike('Trek', 'mountain', 'blue')
+```javascript
+bike1 = new Bike('Cannondale', 'road', 'red')
+bike2 = new Bike('Trek', 'mountain', 'blue')
+```
 
 
 function Bike () {
