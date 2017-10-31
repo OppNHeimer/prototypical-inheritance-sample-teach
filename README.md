@@ -1,4 +1,4 @@
-# Prototypical Inheritance
+# Prototypal Inheritance
 
 ## Learning Objectives
 - Demonstrate a use case that explains prototypal inheritance and what kind of flexibility it gives to programmers
@@ -8,7 +8,15 @@
 ## What is prototypal inheritance?
 ...
 ### What is inheritance?
-![alt text](./images/inheritance_def.png)
+![alt text](./images/inheritance_def.png "inheritance definitions")
+
+### What is a prototype?
+
+![alt text](./images/prototype_def.png "prototype definition")
+
+
+
+
 
 function Mammal () {
 	this.warmBlooded = true
