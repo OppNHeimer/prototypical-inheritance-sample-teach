@@ -20,7 +20,7 @@ Prototyping is an important part of all design. It's a process that allows for i
 
 So you test your prototype, you ask for opinions from others, and maybe you run it by potential investors for feedback. Everyone loves the design except they think the color is ugly and they don't like falling over the front when stopping. So what do you do? Naturally you need to create another model, hopefully a better one. Do you start from scratch? Of course not! You reference everything you learning building your first model and you modify it. You keep the parts that are good and improve or replace the parts that aren't to build a new and improved model. This model becomes your current prototype and the cycle continues.
 
-![alt text](./images/bicycle_evolution "evolution of the bicycle")
+![alt text](./images/bicycle_evolution.jpeg "evolution of the bicycle")
 
 
 
