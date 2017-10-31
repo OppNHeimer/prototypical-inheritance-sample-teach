@@ -24,18 +24,64 @@ Prototyping is an important part of all design. It's a process that allows for i
 So you test your prototype, you ask for opinions from others, and maybe you run it by potential investors for feedback. Everyone loves the design except they think the color is ugly and they don't like falling over the front when stopping. So what do you do? 
 
 #### Repeat
-Naturally you need to create another model, hopefully a better one. Do you start from scratch? Of course not! You reference everything you learning building your first model and you modify it. You keep the parts that are good and improve or replace the parts that aren't to build a new and improved model. This model becomes your current prototype and the _cycle_ continues. Each new model takes qualities from the previous model and builds off them. In other words, __a new model inherits from its prototype__. 
+Naturally you need to create another model, hopefully a better one. Do you start from scratch? Of course not! You reference everything you learning building your first model and you modify it. You keep the parts that are good and improve or replace the parts that aren't to build a new and improved model. This model becomes your current prototype and the cycle continues. Each new model takes qualities from the previous model and builds off them. In other words, __a new model inherits from its prototype__. 
 
 ![alt text](./images/bicycle_evolution.svg "evolution of the bicycle")
 
-We don't have to _reinvent the wheel_ every time we create a new bicycle. We can save time and energy focusing on what is specifically new or different rather than repeating the design process from the very beginning.
+We don't have to reinvent the wheel every time we create a new bicycle. We can save time and energy focusing on what is specifically new or different rather than repeating the design process from the very beginning.
 
 ## Prototypal Inheritance in JavaScript
 
-The concept of a prototype is critical to understanding inheritance in JavaScript and it allows us the same benefits.
+The concept of a prototype is critical to understanding inheritance in JavaScript and it allows us the same benefits seen in product design.
 - prevents unnecessary repetition
 - saves time
-- helps organize code into smaller blocks representing incremental differences
+- helps organize code into smaller pieces
+
+Consider we own a bike shop and we're building a website. We need to represent our inventory as objects to be displayed online.
+
+We could define an object for each bike in the shop...
+
+let bike1 = {
+  brand: 'Cannondale',
+  type: 'road',
+  color: 'red',
+  wheels: 2,
+	roll: function() {
+    console.log('they see me rollin...')
+  }
+}
+
+let bike2 = {
+  brand: 'Trek',
+  type: 'mountain',
+  color: 'blue',
+  wheels: 2,
+	roll: function() {
+    console.log('they see me rollin...')
+  }
+}
+
+What's the problem?
+
+### Introducing Constructor functions
+
+Constructor functions help us define new objects with less repetition.
+- conventionally, constructor function names start with a capital letter
+- constructor functions can be called with the 'new' keyword
+
+First we define our constructor function.
+>function Bike (brand, type, color) {
+>  this.brand = brand
+>  this.type = type
+>  this.color = color
+>  this.wheels = 2
+>  this.roll = function () {
+>    console.log('they see me rollin')
+>  }
+>} 
+Then, we call it.
+>bike1 = new Bike('Cannondale', 'road', 'red')
+>bike2 = new Bike('Trek', 'mountain', 'blue')
 
 
 function Bike () {
