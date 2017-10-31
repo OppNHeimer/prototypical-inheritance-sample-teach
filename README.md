@@ -24,23 +24,45 @@ Prototyping is an important part of all design. It's a process that allows for i
 So you test your prototype, you ask for opinions from others, and maybe you run it by potential investors for feedback. Everyone loves the design except they think the color is ugly and they don't like falling over the front when stopping. So what do you do? 
 
 #### Repeat
-Naturally you need to create another model, hopefully a better one. Do you start from scratch? Of course not! You reference everything you learning building your first model and you modify it. You keep the parts that are good and improve or replace the parts that aren't to build a new and improved model. This model becomes your current prototype and the cycle continues. Each new model takes qualities from the previous one and builds off them. In other words, a new model inherits from its prototype.
+Naturally you need to create another model, hopefully a better one. Do you start from scratch? Of course not! You reference everything you learning building your first model and you modify it. You keep the parts that are good and improve or replace the parts that aren't to build a new and improved model. This model becomes your current prototype and the _cycle_ continues. Each new model takes qualities from the previous model and builds off them. In other words, __a new model inherits from its prototype__. 
 
 ![alt text](./images/bicycle_evolution.svg "evolution of the bicycle")
 
+We don't have to _reinvent the wheel_ every time we create a new bicycle. We can save time and energy focusing on what is specifically new or different rather than repeating the design process from the very beginning.
+
+## Prototypal Inheritance in JavaScript
+
+The concept of a prototype is critical to understanding inheritance in JavaScript and it allows us the same benefits.
+- prevents unnecessary repetition
+- saves time
+- helps organize code into smaller blocks representing incremental differences
 
 
-
-
-function Mammal () {
-	this.warmBlooded = true
-	this.meow = function() {
-		console.log('meow')
+function Bike () {
+	this.wheels = 2
+	this.roll = function () {
+		console.log('they see me rollin...')
     }
 }
 
-function Cat (name) {
-	this.name = name 
+anyBike = new Bike ()
+
+function MountainBike () {
+	this.hasSuspension = true
+	this.offRoad = function () {
+		console.log('bump bump bump bump')
+    }
 }
 
-Cat.prototype = new Mammal
+MountainBike.prototype = new Bike()
+
+function TrekMtnBike (frameSize, color) {
+	this.frameSize = frameSize
+	this.color = color
+	this.brand = 'Trek'
+}
+
+TrekMtnBike.prototype = new MountainBike()
+
+largeBlueTrek = new TrekMtnBike('58cm', 'blue')
+
