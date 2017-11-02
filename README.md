@@ -120,7 +120,7 @@ Building large objects incrementally using inheritance:
 Returning to the bike shop example, lets build more complicated objects using inheritance.
 
 ##### sugar
-First we create a general class. One that will be true for all bikes in our shop.
+First we create a parent class. One that will be true for all bikes in our shop.
 ```javascript
 class Bike {
   //the constructor creates instances of Bike which will all have 2 wheels
@@ -144,37 +144,49 @@ let anyBike = new Bike()
 Next, we create another _simple_ class, a subclass that will inherit from Bike. Together they can create objects that are more complicated than either can alone.
 
 ```javascript
-class TrekBike extends Bike {
-	constructor(type) {
-		super()
-		this.type = type
-		this.brand = 'Trek'
-    }
+class BikeType extends Bike {
+  constructor(type, brand) {
+    super()
+    this.type = type
+    this.brand = brand
+  }
 }
 ```
 
-Our subclass has two key differences. It uses the keyword 'extends' to inherit methods from Bike. To inherit the parent classes properties we use the super function to call the parent class' constructor method.
+Our subclass has two key differences. It uses the keyword 'extends' to inherit methods from Bike. To inherit the parent class' properties we use the super function. Super calls the parent class' constructor method inside of the subclass' constructor.
 
 Again, we can create an instance of our subclass with 'new'.
 
 ```javascript
-trekMtnBike = new TrekBike('mountain')
+trekRoadBike = new BikeType('Road', 'Trek')
 //this time we pass an argument to TrekBike because TrekBike's constructor has a type parameter.
 ```
 
-class TrekRoadBike extends TrekBike {
+Now we can create bikes with any combination of type and brand.
+Plus, they all still have two wheels and can roll.
+
+We can continue to incrementally add complexity to our objects by creating additional subclasses. Perhaps we have several mountain bikes made by Giant but they are varied in size and color.
+
+First, create a class that inherits from BikeType.
+
+```javascript
+class GiantMtnBike extends BikeType {
 	constructor(frameSize, color) {
-		super('road')
+		super('mountain', 'Giant')
 		this.frameSize = frameSize
 		this.color = color
     }
-	sayBrand () {
-		console.log('I was made by ' + this.brand) 
+	goOffroad () {
+		console.log('bump bump bump bump') 
     }
 }
+//Notice that super now takes two arguments to specify that all objects created with this subclass will be mountain bikes made by Giant.
 ```
 
+Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. This process gives us flexibility in creating complex objects and prevents repetitive code. 
+
 ##### desugar
+
 ```javascript
 function Bike () {
     this.wheels = 2
@@ -201,7 +213,7 @@ TrekRoadBike.prototype = Object.create(TrekBike.prototype)
 TrekRoadBike.prototype.sayBrand = function () {
 	console.log('I was made by ' + this.brand)
 }
-
+```
 
 
 
