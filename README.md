@@ -111,71 +111,16 @@ We don't have to reinvent the wheel every time we create a new bicycle. We can s
 ### Prototypal Inheritance in JavaScript
 
 The concept of a prototype is critical to understanding inheritance in JavaScript and it allows us the same benefits seen in product design.
+
+Building large objects incrementally using inheritance:
 - prevents unnecessary repetition
 - saves time
 - helps organize code into smaller pieces
 
+Returning to the bike shop example, lets build more complicated objects using inheritance.
 
-
-function Bike () {
-	this.wheels = 2
-	this.roll = function () {
-		console.log('they see me rollin...')
-    }
-}
-
-anyBike = new Bike ()
-
-function MountainBike () {
-	this.hasSuspension = true
-	this.offRoad = function () {
-		console.log('bump bump bump bump')
-    }
-}
-
-MountainBike.prototype = new Bike()
-
-function TrekMtnBike (frameSize, color) {
-	this.frameSize = frameSize
-	this.color = color
-	this.brand = 'Trek'
-}
-
-TrekMtnBike.prototype = new MountainBike()
-
-largeBlueTrek = new TrekMtnBike('58cm', 'blue')
-
-
-/////////////////////
-function Bike () {
-    this.wheels = 2
-	this.roll = function () {
-		console.log('they see me rollin...')
-    }
-}
-
-function TrekBike (type) {
-	this.type = type
-	this.brand = 'Trek'
-}
-
-TrekBike.prototype = new Bike()
-
-function TrekRoadBike (frameSize, color) {
-	this.frameSize = frameSize
-	this.color = color
-	this.sayBrand = function () {
-		console.log('I was made by ' + this.brand)
-    }
-}
-
-TrekRoadBike.prototype = new TrekBike('road')
-
-let myBike = new TrekRoadBike('56cm', 'black')
-
-
-____________________
-class, new, super keywords
+##### sugar
+First we create a general class. One that will be true for all bikes in our shop.
 ```javascript
 class Bike {
 	constructor() {
@@ -186,6 +131,14 @@ class Bike {
 		console.log('they see me rollin...')
     }
 }
+```
+
+Great! Our first class is simple and will hold true for all bikes. We can create an instance of this class with the 'new' keyword. 
+
+```javascript
+let anyBike = new Bike()
+//Bike takes no arguments because Bike's constructor method has no parameters
+```
 
 class TrekBike extends Bike {
 	constructor(type) {
@@ -207,8 +160,7 @@ class TrekRoadBike extends TrekBike {
 }
 ```
 
-_________________
-prototypical inheritance 
+##### desugar
 ```javascript
 function Bike () {
     this.wheels = 2
@@ -235,3 +187,9 @@ TrekRoadBike.prototype = Object.create(TrekBike.prototype)
 TrekRoadBike.prototype.sayBrand = function () {
 	console.log('I was made by ' + this.brand)
 }
+
+
+
+
+
+
