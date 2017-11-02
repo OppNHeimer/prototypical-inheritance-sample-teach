@@ -5,7 +5,7 @@
 - Use namespaces to organize application code
 - Demonstrate a use case that explains prototypal inheritance and what kind of flexibility it gives to programmers  
   
-<br><br> 
+<br>
 
 Consider we own a bike shop and we're building a website. We need to represent our inventory as objects to be displayed online.
 
@@ -33,7 +33,7 @@ let bike2 = {
 ...but _should_ we?  
 What's the problem with this strategy?
 
-<br><br>
+<br>
 
 ### Introducing Class 
 
@@ -42,7 +42,7 @@ Classes help us define new objects with less repetition. They serve as blueprint
 - classes contain a constructor method which creates instances of the class
 - a class can be instantiated with the 'new' keyword
 
-<br><br>
+<br>
 
 First we define our Class.
 ```javascript
@@ -64,6 +64,8 @@ let bike1 = new Bike('road', 'red')
 let bike2 = new Bike('mountain', 'blue')
 ```
 
+<br>
+
 Classes in JavaScript are syntactic sugar. They allow us to package the constructor and the methods to be used by new objects in one place. The code below achieves the same effect without using the 'class' keyword.
 
 #### desugared
@@ -84,11 +86,11 @@ let bike1 = new Bike('road', 'red')
 let bike2 = new Bike('mountain', 'blue')
 ```
 
-<br><br>
+<br>
 
 Classes help solve our repetition problem. We created one class which can be reused to create any number of bikes without hard-coding individual objects.
 
-... but we have another problem. A bike can't be fully described with a type and color alone. We probably want to include information about the brand, model, frame size, wheel size, ect.. Perhaps different types of bikes have different functions. You wouldn't use a road bike, off-road, and you wouldn't commute to work on a bmx bike.
+... but we have another problem. A bike can't be fully described with a type and color alone. We want to include information about the brand, model, frame size, wheel size, ect.. Perhaps different types of bikes have different functions. You wouldn't use a road bike, off-road, and you wouldn't commute to work on a bmx bike.
 
 __Objects can become large and complex__.
 
@@ -119,6 +121,8 @@ Naturally you need to create another model, hopefully a better one. Do you start
 
 We don't have to reinvent the wheel every time we create a new bicycle. We can save time and energy focusing on what is specifically new or different rather than repeating the design process from the very beginning. __Prototypal inheritance allows us to build incrementally__.
 
+<br>
+
 ### Prototypal Inheritance in JavaScript
 
 The concept of a prototype is critical to understanding inheritance in JavaScript and it allows us the same benefits seen in product design.
@@ -128,8 +132,11 @@ Building large objects incrementally using inheritance:
 - saves time
 - helps organize code into simple parts
 
+<br>
+
 Returning to the bike shop example, lets build more complicated objects using inheritance.
 
+<br>
 
 First we create a parent class. One that will be true for all bikes in our shop.
 ```javascript
@@ -151,6 +158,8 @@ Great! Our first class is simple and will hold true for all bikes. We can create
 let anyBike = new Bike()
 //Bike takes no arguments because Bike's constructor method has no parameters.
 ```
+
+<br>
 
 Next, we create another _simple_ class, a subclass that will inherit from Bike. Together they can create objects that are more complicated than either can alone.
 
@@ -176,10 +185,9 @@ trekRoadBike = new BikeType('road', 'Trek')
 Now we can create bikes with any combination of type and brand.
 Plus, they all still have two wheels and can roll.
 
+<br>
+
 We can continue to incrementally add complexity to our objects by creating additional subclasses. Perhaps we have several mountain bikes made by Giant but they are varied in size and color.
-
-First, create a class that inherits from BikeType.
-
 ```javascript
 class GiantMtnBike extends BikeType {
   constructor(frameSize, color) {
@@ -199,6 +207,8 @@ Lets create an instance of GiantMtnBike to demonstrate that we have access to at
 ```javascript
 bigBlueGiant = new GiantMtnBike('58cm', 'blue')
 ```
+
+<br>
 
 Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. We can target methods to objects which need them without bloating others with unnecessary and potentially harmful code. This process gives us flexibility in creating complex objects using simple code while preventing repetition and unexpected errors.
 
