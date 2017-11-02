@@ -33,12 +33,10 @@ What's the problem with this strategy?
 
 ### Introducing Class 
 
-Classes help us define new objects with less repetition. Classes in JavaScript are syntactic sugar. They allow us to package the constructor (a method needed to create new objects) and the methods to be used by the new objects in one place.
+Classes help us define new objects with less repetition. They serve as blueprints that give form to new objects. Class declarations contain a method called a constructor which is called automatically when the 'new' keyword is used. Constructor methods may take arguments which are translated to properties of new objects.
 - conventionally, class names start with a capital letter
+- classes contain a constructor method which creates instances of the class
 - a class can be instantiated with the 'new' keyword
-
-Classes serve as blueprints that give form to new objects. Class declarations contain a method called a constructor which is called automatically with the 'new' keyword. Constructor methods may take arguments which are translated to properties of the new object.
-
 
 First we define our Class.
 #### sugar
@@ -55,24 +53,26 @@ class Bike {
   }
 }
 ```
+Then, we create instances of our class.
+```javascript
+let bike1 = new Bike('road', 'red')
+let bike2 = new Bike('mountain', 'blue')
+```
+
+Classes in JavaScript are syntactic sugar. They allow us to package the constructor and the methods to be used by new objects in one place. The code below achieves the same effect without using the 'class' keyword.
 
 #### desugar
 ```javascript
+//constructor function
 function Bike (type, color) {
   this.type = type
   this.color = color
   this.wheels = 2
 } 
-
+//function to give a method to instances of Bike
 Bike.prototype.roll = function () {
-    console.log('they see me rollin...')
+  console.log('they see me rollin...')
   }
-```
-
-Then, we create instances of our class.
-```javascript
-let bike1 = new Bike('road', 'red')
-let bike2 = new Bike('mountain', 'blue')
 ```
 
 Classes help solve our repetition problem. We created one class which can be reused to create any number of bikes without hard-coding individual objects.
