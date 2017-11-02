@@ -4,10 +4,18 @@
 - Define a custom constructor method that sets one or more properties of a new object
 - Use namespaces to organize application code
 - Demonstrate a use case that explains prototypal inheritance and what kind of flexibility it gives to programmers
-{zwsp}
-{zwsp}
-{zwsp}
-{zwsp}
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
+{zwsp} +
 Consider we own a bike shop and we're building a website. We need to represent our inventory as objects to be displayed online.
 
 We _could_ define an object for each bike in the shop...
