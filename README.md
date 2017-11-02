@@ -115,7 +115,7 @@ The concept of a prototype is critical to understanding inheritance in JavaScrip
 Building large objects incrementally using inheritance:
 - prevents unnecessary repetition
 - saves time
-- helps organize code into smaller pieces
+- helps organize code into simple parts
 
 Returning to the bike shop example, lets build more complicated objects using inheritance.
 
@@ -125,11 +125,11 @@ First we create a general class. One that will be true for all bikes in our shop
 class Bike {
   //the constructor creates instances of Bike which will all have 2 wheels
   constructor () {
-		this.wheels = 2
+    this.wheels = 2
   }
   //all instances of Bike will have access to the roll method
-	roll () {
-		console.log('they see me rollin...')
+  roll () {
+    console.log('they see me rollin...')
   }
 }
 ```
@@ -138,7 +138,7 @@ Great! Our first class is simple and will hold true for all bikes. We can create
 
 ```javascript
 let anyBike = new Bike()
-//Bike takes no arguments because Bike's constructor method has no parameters
+//Bike takes no arguments because Bike's constructor method has no parameters.
 ```
 
 Next, we create another _simple_ class, a subclass that will inherit from Bike. Together they can create objects that are more complicated than either can alone.
@@ -151,6 +151,15 @@ class TrekBike extends Bike {
 		this.brand = 'Trek'
     }
 }
+```
+
+Our subclass has two key differences. It uses the keyword 'extends' to inherit methods from Bike. To inherit the parent classes properties we use the super function to call the parent class' constructor method.
+
+Again, we can create an instance of our subclass with 'new'.
+
+```javascript
+trekMtnBike = new TrekBike('mountain')
+//this time we pass an argument to TrekBike because TrekBike's constructor has a type parameter.
 ```
 
 class TrekRoadBike extends TrekBike {
