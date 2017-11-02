@@ -96,7 +96,7 @@ Prototypal inheritance helps us manage complexity.
 ##### Build
 Prototyping is an important part of all design. It's a process that allows for incremental testing and improvement of a product. Consider the example of designing a bicycle. First you must develop a prototype, a working model to showcase your design. You start simple knowing you can revise your product later. You invest enough time and money to build your model, a prototype to showcase your idea.
 
-![alt text](./images/highwheel_bike.png "draisine bike")
+![alt text](./images/draisine.jpeg "draisine bike")
 
 ##### Test
 So you test your prototype, you ask for opinions from others. Everyone loves the design except but they have some suggestions for improving it. So what do you do? 
