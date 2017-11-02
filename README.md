@@ -1,9 +1,11 @@
 # Constructors and Prototypal Inheritance
 
 ## Learning Objectives
-- Demonstrate a use case that explains prototypal inheritance and what kind of flexibility it gives to programmers
-- Use namespaces to organize application code
 - Define a custom constructor method that sets one or more properties of a new object
+- Use namespaces to organize application code
+- Demonstrate a use case that explains prototypal inheritance and what kind of flexibility it gives to programmers
+
+
 
 Consider we own a bike shop and we're building a website. We need to represent our inventory as objects to be displayed online.
 
@@ -28,37 +30,58 @@ let bike2 = {
   }
 }
 ```
-
+...but _should_ we?
 What's the problem with this strategy?
 
 ## Introducing Constructor functions
 
 Constructor functions help us define new objects with less repetition.
-- conventionally, constructor function names start with a capital letter
-- constructor functions can be called with the 'new' keyword
+- conventionally, class names start with a capital letter
+- constructor functions can be instantiated with the 'new' keyword
 
-Constructor functions serve as blueprints or general outlines that give form to new objects. Constructor functions may take arguments which are translated to properties of the new object.
+Classes serve as blueprints or general outlines that give form to new objects. Class declarations contain a method called a constructor. Constructor methods may take arguments which are translated to properties of the new object.
 
-First we define our constructor function.
+
+First we define our Class.
+
+
+#### sugar
+```javascript
+class Bike {
+  constructor (type, color) {
+    this.type = type
+    this.color = color
+    this.wheels = 2
+  }
+
+  roll () {
+    console.log('they see me rollin...')
+  }
+}
+```
+
+#### desugar
 ```javascript
 function Bike (type, color) {
   this.type = type
   this.color = color
   this.wheels = 2
-  this.roll = function () {
-    console.log('they see me rollin')
-  }
 } 
+
+Bike.prototype.roll = function () {
+    console.log('they see me rollin...')
+  }
 ```
 
-Then, we call it.
+Then, we create instances of our class.
 ```javascript
 let bike1 = new Bike('road', 'red')
 let bike2 = new Bike('mountain', 'blue')
 ```
+
 Constructor functions help solve our repetition problem. We created one constructor function which can be reused to create any number of bikes without hard-coding individual objects.
 
-... but we still have a problem. A bike can't be fully described with a type and color alone. We probably want to include information about the brand, model, frame size, wheel size, ect.. Perhaps different types of bikes have different functions. Sure all bikes roll, but you wouldn't use a road bike off-road and you wouldn't commute to work on a bmx bike.
+... but we have another problem. A bike can't be fully described with a type and color alone. We probably want to include information about the brand, model, frame size, wheel size, ect.. Perhaps different types of bikes have different functions. Sure all bikes roll, but you wouldn't use a road bike, off-road, and you wouldn't commute to work on a bmx bike.
 
 Point being, __objects can become large and complex__.
 
@@ -87,7 +110,7 @@ Naturally you need to create another model, hopefully a better one. Do you start
 
 ![alt text](./images/bicycle_evolution.svg "evolution of the bicycle")
 
-We don't have to reinvent the wheel every time we create a new bicycle. We can save time and energy focusing on what is specifically new or different rather than repeating the design process from the very beginning.
+We don't have to reinvent the wheel every time we create a new bicycle. We can save time and energy focusing on what is specifically new or different rather than repeating the design process from the very beginning. __Prototypal inheritance allows us to build incrementally__.
 
 ## Prototypal Inheritance in JavaScript
 
@@ -126,3 +149,93 @@ TrekMtnBike.prototype = new MountainBike()
 
 largeBlueTrek = new TrekMtnBike('58cm', 'blue')
 
+
+/////////////////////
+function Bike () {
+    this.wheels = 2
+	this.roll = function () {
+		console.log('they see me rollin...')
+    }
+}
+
+function TrekBike (type) {
+	this.type = type
+	this.brand = 'Trek'
+}
+
+TrekBike.prototype = new Bike()
+
+function TrekRoadBike (frameSize, color) {
+	this.frameSize = frameSize
+	this.color = color
+	this.sayBrand = function () {
+		console.log('I was made by ' + this.brand)
+    }
+}
+
+TrekRoadBike.prototype = new TrekBike('road')
+
+let myBike = new TrekRoadBike('56cm', 'black')
+
+
+____________________
+class, new, super keywords
+```javascript
+class Bike {
+	constructor() {
+		this.wheels = 2
+    }
+
+	roll () {
+		console.log('they see me rollin...')
+    }
+}
+
+class TrekBike extends Bike {
+	constructor(type) {
+		super()
+		this.type = type
+		this.brand = 'Trek'
+    }
+}
+
+class TrekRoadBike extends TrekBike {
+	constructor(frameSize, color) {
+		super('road')
+		this.frameSize = frameSize
+		this.color = color
+    }
+	sayBrand () {
+		console.log('I was made by ' + this.brand) 
+    }
+}
+```
+
+_________________
+prototypical inheritance 
+```javascript
+function Bike () {
+    this.wheels = 2
+}
+Bike.prototype.roll = function () {
+	console.log('they see me rollin...')
+}
+
+function TrekBike (type) {
+  Bike.call(this)
+	this.type = type
+	this.brand = 'Trek'
+}
+
+TrekBike.prototype = Object.create(Bike.prototype)
+
+function TrekRoadBike (frameSize, color) {
+	TrekBike.call(this, 'road')
+	this.frameSize = frameSize
+	this.color = color
+}
+TrekRoadBike.prototype = Object.create(TrekBike.prototype)
+
+TrekRoadBike.prototype.sayBrand = function () {
+	console.log('I was made by ' + this.brand)
+}
