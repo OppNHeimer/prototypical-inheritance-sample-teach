@@ -123,13 +123,14 @@ Returning to the bike shop example, lets build more complicated objects using in
 First we create a general class. One that will be true for all bikes in our shop.
 ```javascript
 class Bike {
-	constructor() {
+  //the constructor creates instances of Bike which will all have 2 wheels
+  constructor () {
 		this.wheels = 2
-    }
-
+  }
+  //all instances of Bike will have access to the roll method
 	roll () {
 		console.log('they see me rollin...')
-    }
+  }
 }
 ```
 
@@ -140,6 +141,9 @@ let anyBike = new Bike()
 //Bike takes no arguments because Bike's constructor method has no parameters
 ```
 
+Next, we create another _simple_ class, a subclass that will inherit from Bike. Together they can create objects that are more complicated than either can alone.
+
+```javascript
 class TrekBike extends Bike {
 	constructor(type) {
 		super()
@@ -147,6 +151,7 @@ class TrekBike extends Bike {
 		this.brand = 'Trek'
     }
 }
+```
 
 class TrekRoadBike extends TrekBike {
 	constructor(frameSize, color) {
