@@ -158,7 +158,7 @@ Our subclass has two key differences. It uses the keyword 'extends' to inherit m
 Again, we can create an instance of our subclass with 'new'.
 
 ```javascript
-trekRoadBike = new BikeType('Road', 'Trek')
+trekRoadBike = new BikeType('road', 'Trek')
 //this time we pass an argument to TrekBike because TrekBike's constructor has a type parameter.
 ```
 
@@ -171,48 +171,72 @@ First, create a class that inherits from BikeType.
 
 ```javascript
 class GiantMtnBike extends BikeType {
-	constructor(frameSize, color) {
-		super('mountain', 'Giant')
-		this.frameSize = frameSize
-		this.color = color
+  constructor(frameSize, color) {
+    super('mountain', 'Giant')
+    this.frameSize = frameSize
+    this.color = color
     }
-	goOffroad () {
-		console.log('bump bump bump bump') 
-    }
+  goOffroad () {
+    console.log('bump bump bump bump') 
+  }
 }
 //Notice that super now takes two arguments to specify that all objects created with this subclass will be mountain bikes made by Giant.
 ```
 
-Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. This process gives us flexibility in creating complex objects and prevents repetitive code. 
+Lets create an instance of GiantMtnBike to demonstrate that we have access to attributes and methods from both the BikeType and Bike classes.
+
+```javascript
+bigBlueGiant = new GiantMtnBike('58cm', 'blue')
+```
+
+Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. We can target methods to objects which need them without bloating others with unnecessary and potentially harmful code. This process gives us flexibility in creating complex objects using simple code while preventing repetition and unexpected errors.
 
 ##### desugar
 
 ```javascript
+//parent class constructor function
 function Bike () {
-    this.wheels = 2
+  this.wheels = 2
 }
+//add a Bike method
 Bike.prototype.roll = function () {
-	console.log('they see me rollin...')
+  console.log('they see me rollin...')
 }
 
-function TrekBike (type) {
-  Bike.call(this)
-	this.type = type
-	this.brand = 'Trek'
+//instantiate a new Bike
+let anyBike = new Bike()
+
+//BikeType subclass constructor function
+function BikeType (type, brand) {
+  Bike.call(this) //inherits attributes from Bike
+  this.type = type
+  this.brand = brand
+  }
+
+//BikeType inherits methods from Bike
+BikeType.prototype = Object.create(Bike.prototype)
+
+//instantiate a new BikeType
+trekRoadBike = new BikeType('road', 'Trek')
+
+//GiantMtnBike subclass constructor function
+function GiantMtnBike (frameSize, color) {
+  BikeType.call(this, 'road', 'Trek') //inherits attributes from BikeType
+  this.frameSize = frameSize
+  this.color = color
 }
 
-TrekBike.prototype = Object.create(Bike.prototype)
+//GiantMtnBike inherits methods from BikeType
+GiantMtnBike.prototype = Object.create(BikeType.prototype)
 
-function TrekRoadBike (frameSize, color) {
-	TrekBike.call(this, 'road')
-	this.frameSize = frameSize
-	this.color = color
+//add a GiantMtnBike method
+GiantMtnBike.prototype.goOffroad = function () {
+  console.log('bumb bump bump bump')
 }
-TrekRoadBike.prototype = Object.create(TrekBike.prototype)
 
-TrekRoadBike.prototype.sayBrand = function () {
-	console.log('I was made by ' + this.brand)
-}
+//instantiate a new GiantMtnBike
+trekRoadBike = new BikeType('road', 'Trek')
+
 ```
 
 
