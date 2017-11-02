@@ -5,9 +5,7 @@
 - Use namespaces to organize application code
 - Demonstrate a use case that explains prototypal inheritance and what kind of flexibility it gives to programmers  
   
-<br><br><br><br><br><br><br>  
-  
-  
+<br><br> 
 
 Consider we own a bike shop and we're building a website. We need to represent our inventory as objects to be displayed online.
 
@@ -32,8 +30,10 @@ let bike2 = {
   }
 }
 ```
-...but _should_ we?
+...but _should_ we?  
 What's the problem with this strategy?
+
+<br><br>
 
 ### Introducing Class 
 
@@ -42,8 +42,9 @@ Classes help us define new objects with less repetition. They serve as blueprint
 - classes contain a constructor method which creates instances of the class
 - a class can be instantiated with the 'new' keyword
 
+<br><br>
+
 First we define our Class.
-#### sugar
 ```javascript
 class Bike {
   constructor (type, color) {
@@ -65,7 +66,7 @@ let bike2 = new Bike('mountain', 'blue')
 
 Classes in JavaScript are syntactic sugar. They allow us to package the constructor and the methods to be used by new objects in one place. The code below achieves the same effect without using the 'class' keyword.
 
-#### desugar
+#### desugared
 ```javascript
 //constructor function
 function Bike (type, color) {
@@ -82,6 +83,8 @@ Bike.prototype.roll = function () {
 let bike1 = new Bike('road', 'red')
 let bike2 = new Bike('mountain', 'blue')
 ```
+
+<br><br>
 
 Classes help solve our repetition problem. We created one class which can be reused to create any number of bikes without hard-coding individual objects.
 
@@ -127,7 +130,7 @@ Building large objects incrementally using inheritance:
 
 Returning to the bike shop example, lets build more complicated objects using inheritance.
 
-#### sugar
+
 First we create a parent class. One that will be true for all bikes in our shop.
 ```javascript
 class Bike {
@@ -199,7 +202,7 @@ bigBlueGiant = new GiantMtnBike('58cm', 'blue')
 
 Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. We can target methods to objects which need them without bloating others with unnecessary and potentially harmful code. This process gives us flexibility in creating complex objects using simple code while preventing repetition and unexpected errors.
 
-#### desugar
+#### desugared
 
 ```javascript
 //parent class constructor function
