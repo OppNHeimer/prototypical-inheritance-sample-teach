@@ -210,7 +210,9 @@ bigBlueGiant = new GiantMtnBike('58cm', 'blue')
 
 <br>
 
-Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. We can target methods to objects which need them without bloating others with unnecessary and potentially harmful code. This process gives us flexibility in creating complex objects using simple code while preventing repetition and unexpected errors.
+### Wrapping up
+
+Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. This process gives us flexibility in creating complex objects using simple code. We can also target methods to objects which need them without bloating others with unnecessary and potentially harmful code.
 
 #### desugared
 
