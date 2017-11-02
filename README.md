@@ -129,8 +129,8 @@ The concept of a prototype is critical to understanding inheritance in JavaScrip
 
 Building large objects incrementally using inheritance:
 - prevents unnecessary repetition
-- saves time
 - helps organize code into simple parts
+- allows us to create methods and attributes only where they're needed
 
 <br>
 
