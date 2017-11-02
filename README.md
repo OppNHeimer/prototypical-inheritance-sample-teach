@@ -41,7 +41,7 @@ Classes serve as blueprints that give form to new objects. Class declarations co
 
 
 First we define our Class.
-##### sugar
+#### sugar
 ```javascript
 class Bike {
   constructor (type, color) {
@@ -56,7 +56,7 @@ class Bike {
 }
 ```
 
-##### desugar
+#### desugar
 ```javascript
 function Bike (type, color) {
   this.type = type
@@ -119,7 +119,7 @@ Building large objects incrementally using inheritance:
 
 Returning to the bike shop example, lets build more complicated objects using inheritance.
 
-##### sugar
+#### sugar
 First we create a parent class. One that will be true for all bikes in our shop.
 ```javascript
 class Bike {
@@ -191,7 +191,7 @@ bigBlueGiant = new GiantMtnBike('58cm', 'blue')
 
 Creating objects using prototypal inheritance allows us to focus on small and simple steps, working from a broad parent class to more specific subclasses. We can target methods to objects which need them without bloating others with unnecessary and potentially harmful code. This process gives us flexibility in creating complex objects using simple code while preventing repetition and unexpected errors.
 
-##### desugar
+#### desugar
 
 ```javascript
 //parent class constructor function
